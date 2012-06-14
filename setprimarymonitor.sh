@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Author: Matt Walker (@_walkermatt)
 #
 # Script to allow you to set the primary monitor on Linux.
@@ -25,4 +26,4 @@ do
         ;;
     esac
 done
- 
+
