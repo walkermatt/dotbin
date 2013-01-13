@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-"""Usage: urlencode.py [options] [FILE...]
+"""Usage: urlencode [options] [FILE...]
 
 URL encode the string passed via standard input or found
 in the specified files

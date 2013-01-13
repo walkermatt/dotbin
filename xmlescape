@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-"""Usage: xmlescape.py [options] [FILE...]
+"""Usage: xmlescape [options] [FILE...]
 
 XML escape the string passed via standard input or
 found in the specified files
