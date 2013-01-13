@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-"""Usage: importphotos.py [-h --help] [-c --copy] [-s --src_dir DIR] [-d --dest_dir DIR]
+"""Usage: importphotos.py [-h] [-c] [-s DIR] [-d DIR]
 
 Move or optionally copy and rename photos from the source directory to the
 destination directory renaming to YYYY-MM-DD HH.NN.SS.jpg in a directory
@@ -63,16 +63,16 @@ def import_photos(copy_files, src_dir, dest_dir):
 
 if __name__ == '__main__':
 
-    options, arguments = docopt(__doc__)
+    args = docopt(__doc__)
 
-    src_dir = options.src_dir
+    src_dir = args['--src_dir']
     if not os.path.exists(src_dir):
         print('The source path (src_dir: %s) does not exist' % src_dir)
         exit(1)
 
-    dest_dir = options.dest_dir
+    dest_dir = args['--dest_dir']
     if not os.path.exists(dest_dir):
         print('The destination path (dest_dir: %s) does not exist' % dest_dir)
         exit(1)
 
-    import_photos(options.copy, src_dir, dest_dir)
+    import_photos(args['--copy'], src_dir, dest_dir)
