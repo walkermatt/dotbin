@@ -1,0 +1,26 @@
+#!/usr/bin/python
+
+"""Usage: xmlescape.py [options] [FILE...]
+
+XML escape the string passed via standard input or
+found in the specified files
+
+Options:
+  -h --help             Show this help message and exit
+  -u --unescape         XML unescape the passed string
+
+"""
+import fileinput
+from docopt import docopt
+from xml.sax import saxutils
+
+args = docopt(__doc__)
+
+lines = []
+for line in fileinput.input(args['FILE']):
+    lines.append(line[:-1])
+
+# Determine which function to use
+func = saxutils.unescape if args['--unescape'] else saxutils.escape
+
+print func("\n".join(lines))

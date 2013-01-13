@@ -1,0 +1,26 @@
+#!/usr/bin/python
+
+"""Usage: urlencode.py [options] [FILE...]
+
+URL encode the string passed via standard input or found
+in the specified files
+
+Options:
+  -h --help             Show this help message and exit
+  -d --decode           URL decode the passed string
+
+"""
+import fileinput
+import urllib
+from docopt import docopt
+
+args = docopt(__doc__)
+
+lines = []
+for line in fileinput.input(args['FILE']):
+    lines.append(line[:-1])
+
+# Determine which function to use
+func = urllib.unquote if args['--decode'] else urllib.quote
+
+print func("\n".join(lines))
