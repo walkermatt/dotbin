@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Define a Yank Working Directory command
+# I use this all the time to copy the working directory
+# to the system clipboard. The tr call in the middle removes
+# the trailing newline character
+pwd | tr -d '\n' | xclip -selection c
+echo "Copied '`pwd`' to system clipboard"
