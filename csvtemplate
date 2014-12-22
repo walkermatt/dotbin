@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+
+"""
+Applys a <template_file> to each row in <csv_file> using header names as substitution keys.
+
+Templates are expected to be in String.Template format with placeholders
+expressed as $key.
+
+If <csv_file> is "-" then CSV data will be read from stdin.
+
+Example:
+
+    $ cat template.sql
+    SELECT * FROM "$table_name" order by "$order_column";
+
+    $ cat data.csv
+    table_name,order_column
+    JOBS,CREATION_DATE
+    TASKS,LAST_RUN_DATE
+
+    $ csvtemplate data.csv template.sql
+    SELECT * FROM "JOBS" order by "CREATION_DATE";
+    SELECT * FROM "TASKS" order by "LAST_RUN_DATE";
+
+Usage: $basename <csv_file> <template_file>
+
+"""
+import os
+import csv
+import sys
+from string import Template
+
+
+def process_row(template, row):
+    tmpl = Template(template)
+    return tmpl.safe_substitute(row)
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 2:
+        with open(sys.argv[1]) if sys.argv[1] != '-' else sys.stdin as csv_file:
+            with open(sys.argv[2]) as template_file:
+                template = template_file.read()
+                for row in csv.DictReader(csv_file, delimiter=',', quotechar='"'):
+                    sys.stdout.write(process_row(template, row))
+    else:
+        sys.stderr.write(
+            process_row(
+                __doc__,
+                {'basename': os.path.basename(sys.argv[0])}
+            )
+        )
