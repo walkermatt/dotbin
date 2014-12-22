@@ -25,8 +25,8 @@ Example:
 Usage: $basename <csv_file> <template_file>
 
 """
-import os
 import csv
+import os
 import sys
 from string import Template
 
