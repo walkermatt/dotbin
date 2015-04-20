@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
     xsl_doc = etree.XSLT(etree.parse(open(xsl_file, 'r')))
     xml_doc = etree.parse(open(xml_file, 'r'))
-    output_doc = xsl_doc(xml_doc)
-    print(etree.tostring(output_doc, encoding='UTF-8', pretty_print=True))
-
+    result = xsl_doc(xml_doc)
+    s = etree.tostring(result, encoding='UTF-8', pretty_print=True)
+    s = unicode(result) if s is None else s
+    print(s)
