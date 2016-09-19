@@ -3,4 +3,4 @@
 import sys
 import sqlparse
 
-print sqlparse.format(sys.stdin.read(), reindent=True, indent_width=4, keyword_case='upper')
+print sqlparse.format(sys.stdin.read(), reindent=True, keyword_case='upper')
