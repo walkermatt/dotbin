@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+import codecs
+import sys
+
+def grey(hex_color):
+    # print '|' + hex_color + '|'
+    r = int(hex_color[:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+    x = (r + g + b)/3
+    return hex(x)[2:]*3
+
+# print grey('08b8e8')
+
+UTF8Reader = codecs.getreader('utf8')
+sys.stdin = UTF8Reader(sys.stdin)
+sys.stdout.write(grey(sys.stdin.read()))
