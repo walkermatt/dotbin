@@ -1,0 +1,1 @@
+http-server --cors --ssl --cert ~/Keys/localhost+2.pem --key ~/Keys/localhost+2-key.pem $*
