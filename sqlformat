@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
+import codecs
 import sys
 import sqlparse
 
+UTF8Reader = codecs.getreader('utf8')
+sys.stdin = UTF8Reader(sys.stdin)
 print sqlparse.format(sys.stdin.read(), reindent=True, keyword_case='upper')
