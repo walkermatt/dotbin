@@ -1,1 +1,11 @@
+# Local https server
+#
+# Certificate created using [mkcert](https://github.com/FiloSottile/mkcert)
+# Install certificate store and create cert and private key:
+#   mkcert -install
+#   cd ~/Keys/ && mkcert localhost 127.0.0.1 ::1
+#
+# Any arguments passed this script are passed onto http-server
+# for example `https -p 4002` to run on port 4002
+#
 http-server --cors --ssl --cert ~/Keys/localhost+2.pem --key ~/Keys/localhost+2-key.pem $*
