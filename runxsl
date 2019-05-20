@@ -1,24 +1,18 @@
 #!/usr/bin/python
 
-"""Apply the specifed xsl file to the xml file and
-print out the results
-
-Usage:
-  runxsl.py [options] XSL_FILE XML_FILE
-
-Options:
-  -h --help     Show this help message and exit
-
-"""
-from docopt import docopt
+import argparse
 from lxml import etree
 
 if __name__ == '__main__':
-    args = docopt(__doc__)
+    desc = "Apply the specifed xsl file to the xml file and print out the results"
+    arg_parser = argparse.ArgumentParser(__file__, description=desc, argument_default=argparse.SUPPRESS)
+    arg_parser.add_argument('xsl_file', help='XSLT v1 file to apply to XML file')
+    arg_parser.add_argument('xml_file', help='XML file to transform')
+    args = arg_parser.parse_args()
 
     try:
-        xsl_file = args['XSL_FILE']
-        xml_file = args['XML_FILE']
+        xsl_file = args.xsl_file
+        xml_file = args.xml_file
     except KeyError:
         print(__doc__)
         exit(1)
