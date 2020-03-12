@@ -1,0 +1,6 @@
+# Local http server
+#
+# Any arguments passed this script are passed onto http-server
+# for example `http -p 4002` to run on port 4002
+#
+http-server --cors $*
