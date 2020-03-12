@@ -30,7 +30,7 @@ def main():
     if options.squash:
         json.dump(obj, outfile)
     else:
-        json.dump(obj, outfile, indent=options.indent)
+        json.dump(obj, outfile, indent=options.indent, separators=(',', ': '))
     outfile.write('\n')
 
 
