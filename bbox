@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+import sys
+import argparse
+import re
+
+
+def parse_bbox(line, frmt):
+    line = line.strip()
+    if frmt == 'URL':
+        match = re.search(r'BBOX=(\d+\.?\d+,\d+\.?\d+,\d+\.?\d+,\d+\.?\d+)', line, flags=re.IGNORECASE)
+        if match:
+            line = match.group(1)
+    return line.strip().split(',')
+
+
+def bbox2wkt(bbox):
+    x1, y1, x2, y2 = bbox
+    wkt = f'POLYGON(({x1} {y1}, {x1} {y2}, {x2} {y2}, {x2} {y1}, {x1} {y1}))'
+    return wkt
+
+
+def cli():
+    desc = "Transform WMS GetMap style BBOX value to WKT"
+    arg_parser = argparse.ArgumentParser(__file__, description=desc, argument_default=argparse.SUPPRESS)
+    arg_parser.add_argument('--file', help='File containing BBOX values to convert, if no file is specified the BBOX is read from stdin')
+    arg_parser.add_argument('--format', default="BBOX", help='Format being parsed, either BBOX (default) or URL')
+    args = vars(arg_parser.parse_args())
+    with open(args['file']) if 'file' in args else sys.stdin as f:
+        for line in f:
+            bbox = parse_bbox(line, args['format'])
+            wkt = bbox2wkt(bbox)
+            print(wkt)
+
+
+if __name__ == '__main__':
+    cli()
