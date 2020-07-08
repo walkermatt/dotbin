@@ -27,10 +27,14 @@ def cli():
     arg_parser.add_argument('--format', default="BBOX", help='Format being parsed, either BBOX (default) or URL')
     args = vars(arg_parser.parse_args())
     with open(args['file']) if 'file' in args else sys.stdin as f:
-        for line in f:
-            bbox = parse_bbox(line, args['format'])
-            wkt = bbox2wkt(bbox)
-            print(wkt)
+        for num, line in enumerate(f, 1):
+            try:
+                print(line)
+                bbox = parse_bbox(line, args['format'])
+                wkt = bbox2wkt(bbox)
+                print(wkt)
+            except Exception as ex:
+                raise ValueError(f'Unable to parse BBOX, line: {num}, text: {line}') from ex
 
 
 if __name__ == '__main__':
