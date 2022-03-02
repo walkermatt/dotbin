@@ -76,6 +76,10 @@ def cli():
                     raise ValueError(f'Unable to parse WKT, line: {num}, text: {line}') from ex
 
 
+# Run unit tests with:
+# ```
+# python3 -m unittest bbox.py
+# ```
 class TestBbox(unittest.TestCase):
     def test_flattern_coords(self):
         self.assertEqual(flattern_coords([[30.0, 10.0], [10.0, 30.0], [40.0, 40.0]]), [
