@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import json
@@ -30,7 +30,7 @@ def main():
     if options.squash:
         json.dump(obj, outfile)
     else:
-        json.dump(obj, outfile, indent=options.indent, separators=(',', ': '))
+        json.dump(obj, outfile, sort_keys=True, indent=options.indent, separators=(',', ': '))
     outfile.write('\n')
 
 
