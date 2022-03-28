@@ -2,6 +2,8 @@
 
 import argparse
 from lxml import etree
+from signal import signal, SIGPIPE, SIG_DFL
+signal(SIGPIPE, SIG_DFL)
 
 if __name__ == '__main__':
     desc = "Apply the specifed xsl file to the xml file and print out the results"
